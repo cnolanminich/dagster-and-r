@@ -1,3 +1,4 @@
+# make sure these packages are installed
 library(reticulate)
 library(readr)
 library(glue)
