@@ -1,23 +1,39 @@
-[tool.poetry]
-name = "dagster-and-r"
+[project]
+name = "dagster_and_r"
 version = "0.1.0"
-description = ""
-authors = ["A042474 <philip.j.orlando@kp.org>"]
+description = "Add your description here"
 readme = "README.md"
+requires-python = ">=3.9,<3.13"
+dependencies = [
+      "dagster",
+      "pandas",
+      "numpy",
+      "dagster-duckdb",
+      "dagster-aws",
+      "dagster-duckdb-pandas",
+      "dagster-snowflake",
+      "dagster-snowflake-pandas",
+      "dagster-cloud[insights]",
+      "gql",
+      "requests",
+      "requests-toolbelt",
+      "dagster-pipes",
+      "dagster-docker",
+]
 
-[tool.poetry.dependencies]
-python = "^3.10"
-dagster = "^1.5.14"
-dagster-webserver = "^1.5.14"
-pytest = "^7.4.4"
-dagster-docker = "^0.21.14"
-matplotlib = "^3.8.2"
-pandas = "^2.1.4"
-requests = "^2.31.0"
-
-[tool.dagster]
-module_name = "dagster_and_r"
+[project.optional-dependencies]
+dev = [
+    "dagster-webserver", 
+    "pytest",
+]
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.dagster]
+module_name = "dagster_and_r.definitions"
+code_location_name = "dagster_and_r"
+
+[tool.setuptools]
+packages = { find = { exclude = ["dagster_and_r_tests"] } }
