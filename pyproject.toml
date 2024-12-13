@@ -1,39 +1,14 @@
 [project]
-name = "dagster_and_r"
+name = "dagster-and-r"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.9,<3.13"
+requires-python = ">=3.12"
 dependencies = [
-      "dagster",
-      "pandas",
-      "numpy",
-      "dagster-duckdb",
-      "dagster-aws",
-      "dagster-duckdb-pandas",
-      "dagster-snowflake",
-      "dagster-snowflake-pandas",
-      "dagster-cloud[insights]",
-      "gql",
-      "requests",
-      "requests-toolbelt",
-      "dagster-pipes",
-      "dagster-docker",
+    "dagster-pandas>=0.25.4",
+    "dagster>=1.9.4",
+    "dagster-docker>=0.25.4",
+    "dagster-pipes>=1.9.4",
+    "dagster-webserver>=1.9.4",
+    "pandas>=2.2.3",
 ]
-
-[project.optional-dependencies]
-dev = [
-    "dagster-webserver", 
-    "pytest",
-]
-
-[build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
-
-[tool.dagster]
-module_name = "dagster_and_r.definitions"
-code_location_name = "dagster_and_r"
-
-[tool.setuptools]
-packages = { find = { exclude = ["dagster_and_r_tests"] } }

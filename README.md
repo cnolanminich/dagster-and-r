@@ -20,16 +20,27 @@ To begin exploring the integration of Dagster and R:
    ```bash
    cd dagster-and-r
    ```
-3. **Install Dependencies**
-   Using [poetry](https://python-poetry.org/), install the package and its dependencies:
-   ```bash
-   poetry install
+3. **Install Python Dependencies**
+   # you'll need a version of python installed
+   Using uv
+   # install uv
+   # curl -LsSf https://astral.sh/uv/install.sh | sh
+   uv venv
+   source .venv/bin/activate
+   uv sync
    ```
+4. ** Install R dependencies**
+```
+   # from R
+   # if you haven't installed renv before
+   # install.packages("renv")
+   # renv::restore() 
+```
 
 4. **Set RETICULATE_PYTHON environment variable** 
 Determine the path to the python binary associated with this project's poetry environment.
    ```bash
-   poetry run
+   # from your viritual environment
    which python
    # /home/user/.cache/pypoetry/virtualenvs/dagster-and-r-kS5e8P_l-py3.10/bin/python
    ```
@@ -38,7 +49,7 @@ Create a new `.Renviron` file at the root of the project and set the `RETICULATE
 5. **Launch the Dagster UI**
    Start the Dagster web server:
    ```bash
-   poetry run dagster dev
+   dagster dev
    ```
    Access the UI at http://localhost:3000 in your browser.
 
@@ -61,7 +72,7 @@ Create a new `.Renviron` file at the root of the project and set the `RETICULATE
 Then, start the Dagster UI web server:
 
 ```bash
-poetry run dagster dev -m dagster_and_r
+dagster dev -m dagster_and_r
 ```
 
 Open http://localhost:3000 with your browser to see the project.
@@ -85,13 +96,13 @@ Open http://localhost:3000 with your browser to see the project.
 ### Adding Python Dependencies
 To add new Python packages to the project:
 ```bash
-poetry add <pkg-name>
+uv add <pkg-name>
 ```
 
 ### Unit Testing
 Unit tests are essential for ensuring code reliability and are currently being developed. Run existing tests using `pytest`:
 ```bash
-poetry run pytest dagster_and_r_tests
+pytest dagster_and_r_tests
 ```
 > [!NOTE]
 > Unit tests are a work in progress.
@@ -99,7 +110,7 @@ poetry run pytest dagster_and_r_tests
 ### Schedules and Sensors
 To enable [Schedules](https://docs.dagster.io/concepts/partitions-schedules-sensors/schedules) and [Sensors](https://docs.dagster.io/concepts/partitions-schedules-sensors/sensors), ensure the [Dagster Daemon](https://docs.dagster.io/deployment/dagster-daemon) is active:
 ```bash
-poetry run dagster dev
+dagster dev
 ```
 With the Daemon running, you can start using schedules and sensors for your jobs.
 
