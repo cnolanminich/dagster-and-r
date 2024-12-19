@@ -1,8 +1,6 @@
-import json
 import shutil
 import pandas as pd
 import dagster as dg 
-from dagster_pandas.data_frame import create_table_schema_metadata_from_dataframe
 
 def create_table_schema_from_dict(type_dict):
     # Map Python types to SQL types

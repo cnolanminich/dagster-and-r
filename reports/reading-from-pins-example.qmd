@@ -1,0 +1,53 @@
+---
+title: "Pins example"
+format: html
+editor: visual
+---
+
+## Getting Data from Pins
+
+This is an example Quarto document that reads in data from a pin. It uses the same environment variables that Dagster uses to determine the environment, so
+
+-   if a pin in written in dev to a local folder, this Quarto document will also read from that same folder path
+
+-   if Dagster writes to S3, this Quarto document will also read from S3
+
+-   If Posit Connect, this Quarto document will also read from Posit Connect
+
+```{r setup}
+library(pins)
+
+dotenv::load_dot_env()
+
+# set based on variables in .env file. In production on Posit Connect could use environment variables there.
+prod_deploy <- Sys.getenv("DAGSTER_PROD_DEPLOY", "")
+test_deploy <- Sys.getenv("DAGSTER_TEST_DEPLOY", "")
+
+```
+
+```{r get-pins-data}
+
+if (prod_deploy == "1") {
+        board <- pins::board_connect(server = Sys.getenv("connect_server"), api_key = "connect_api_key")
+    } else if (test_deploy == "1") {
+        board <- pins::board_s3(
+          bucket = Sys.getenv("AWS_S3_BUCKET"),
+          prefix = "dagster-r-pins/",
+          region = Sys.getenv("AWS_REGION"),
+          access_key = Sys.getenv("AWS_ACCESS_KEY_ID"),
+          secret_access_key = Sys.getenv("AWS_SECRET_ACCESS_KEY")
+          )
+          
+    } else {
+        board <- pins::board_folder(path = Sys.getenv("local_pins_directory"))
+    }
+
+
+df <- pin_read(board, "simple_pins_asset")
+
+```
+
+```{r show-pins-data}
+
+str(df)
+```

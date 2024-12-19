@@ -114,5 +114,20 @@ dagster dev
 ```
 With the Daemon running, you can start using schedules and sensors for your jobs.
 
+
+## Using pins
+
+[Pins] provides a way to publish and cache datasets, model objects, and other intermediate objects to a variety of storage backends. Post Connect, which is a great way to publish shiny dashboards and Quarto documents. From the [Posit Connect docs](https://docs.posit.co/connect/user/pins/#:~:text=Publishing%20data%20as%20pins%20is,need%20to%20be%20regularly%20updated.):
+
+> Publishing data as pins is useful in many situations, for example:
+> 1.  Multiple pieces of content require the same input data. Rather than copying that data, each piece of content references a single source of truth hosted on Connect.
+> 2. Content depends on data or model objects that need to be regularly updated. Rather than redeploying the content each time the data changes, use a pinned resource and update only the data. The data update can occur using a scheduled R Markdown document. Your content reads the newest data on each run.
+
+One challenge with pins is that you need a script to create the pin, which feels more like a traditional data pipeline, within a separate Quarto document. 
+
+Enter **Dagster**. With Dagster you can have the publishing of the pin as the final step in a pipeline, and then the downstream R report can reference it.
+
+But wait, there's more! Using Dagster's environment-aware resources, you can develop locally with pins against a file system, and then move into publishing a pin on Posit Connect in production.
+ 
 ## Contributions
 Contributions to enhance or expand the project are welcome! Feel free to fork the repository, make changes, and submit a pull request.
