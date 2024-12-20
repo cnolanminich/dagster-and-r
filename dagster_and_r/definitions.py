@@ -1,7 +1,4 @@
-from dagster import (
-    Definitions,
-    PipesSubprocessClient,
-    )
+import dagster as dg
 from . jobs import docker_container_op_r
 from . asset_checks import (
     # no_missing_sepal_length_check_r,
@@ -15,7 +12,7 @@ from . assets import (
     iris_py,
     )
 
-defs = Definitions(
+defs = dg.Definitions(
     assets=[
         hello_world_r,
         iris_r,
@@ -26,5 +23,5 @@ defs = Definitions(
         no_missing_sepal_length_check_py,
         ],
     jobs=[docker_container_op_r],
-    resources={"pipes_subprocess_client": PipesSubprocessClient()},
+    resources={"pipes_subprocess_client": dg.PipesSubprocessClient()},
 )
