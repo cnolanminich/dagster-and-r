@@ -20,7 +20,6 @@ def read_pins_asset(
     context.log.info(f"Read pins asset: {df}")
     return df
 
-# TODO add a way to pass the environment to use the correct board
 @dg.asset(
         description="Reads a pin asset from within R",
         deps=["simple_pins_asset"])
