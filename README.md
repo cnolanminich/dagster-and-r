@@ -38,13 +38,13 @@ To begin exploring the integration of Dagster and R:
 ```
 
 4. **Set RETICULATE_PYTHON environment variable** 
-Determine the path to the python binary associated with this project's poetry environment.
-   ```bash
-   # from your viritual environment
-   which python
-   # /home/user/.cache/pypoetry/virtualenvs/dagster-and-r-kS5e8P_l-py3.10/bin/python
-   ```
-Create a new `.Renviron` file at the root of the project and set the `RETICULATE_PYTHON` variable to this path.
+
+Create a new `.Renviron` file at the root of the project and set the `RETICULATE_PYTHON` variable to `.venv/bin/python`, like so:
+
+```bash
+   #.Renviron
+   RETICULATE_PYTHON=.venv/bin/python
+```
 
 5. **Launch the Dagster UI**
    Start the Dagster web server:
